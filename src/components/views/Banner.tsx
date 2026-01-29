@@ -1,92 +1,102 @@
 "use client";
 
-import { useEffect } from "react";
 import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import SocialIcons from "../SocialIcons/SocialIcons";
 import Link from "next/link";
+import HeroScene from "../three/HeroScene"; // Import the Three.js scene
+import { ScrollReveal } from "../animations/ScrollReveal";
+import { motion } from "framer-motion";
+import MagneticButton from "../animations/MagneticButton";
+import { TextReveal } from "../animations/TextReveal";
 
 const Banner = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full  bg-gray-900 py-10">
-        <div className="container mx-auto px-4 md:px-8 text-white flex flex-col md:flex-row items-center justify-between gap-10">
+    <div className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-gray-900">
+
+      {/* Three.js Background */}
+      <div className="absolute inset-0 z-0">
+        <HeroScene />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative z-10 w-full py-10 pointer-events-none"> {/* pointer-events-none to let clicks pass to canvas if needed, but we have interactive buttons so we need careful handling */}
+        <div className="container mx-auto px-4 md:px-8 text-white flex flex-col md:flex-row items-center justify-between gap-10 pointer-events-auto">
           {/* Left Content - Text */}
           <div className="w-full flex-1 space-y-6">
-            <h3
-              data-aos="fade-right"
-              data-aos-duration="1000"
-              className="text-xl md:text-2xl lg:text-3xl xl:text-4xl"
-            >
-              It&apos;s Me
-            </h3>
+            <ScrollReveal width="100%" delay={0.1}>
+              <TextReveal className="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-300">
+                It&apos;s Me
+              </TextReveal>
+            </ScrollReveal>
 
-            <h1
-              data-aos="fade-left"
-              data-aos-duration="1000"
-              className="text-2xl md:text-3xl lg:text-4xl font-semibold"
-            >
-              MD. HUMAYUN KABIR SOBUJ
-            </h1>
+            <ScrollReveal width="100%" delay={0.2}>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 leading-tight">
+                MD. HUMAYUN KABIR SOBUJ
+              </h1>
+            </ScrollReveal>
 
-            <h3
-              data-aos="fade-right"
-              data-aos-duration="1000"
-              className="text-xl md:text-2xl lg:text-3xl font-semibold"
-            >
-              I&apos;m a{" "}
-              <span className="text-blue-300">
-                <Typewriter
-                  words={[
-                    "Full-Stack Developer_",
-                    "Node Js Developer_",
-                    "MERN Stack Developer_",
-                  ]}
-                  loop={true}
-                  cursorStyle="_"
-                  cursorColor="#2196F3"
-                />
-              </span>
-            </h3>
+            <ScrollReveal width="100%" delay={0.3}>
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+                I&apos;m a{" "}
+                <span className="text-blue-300">
+                  <Typewriter
+                    words={[
+                      "Full-Stack Developer_",
+                      "Node Js Developer_",
+                      "MERN Stack Developer_",
+                    ]}
+                    loop={true}
+                    cursorStyle="_"
+                    cursorColor="#2196F3"
+                  />
+                </span>
+              </h3>
+            </ScrollReveal>
 
-            <p
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              className="text-base md:text-lg font-light leading-relaxed"
-            >
-              I am a MERN Stack Web Developer skilled in Tailwind CSS,
-              JavaScript, TypeScript, React.js, and Next.js. I have experience
-              with Firebase, Node.js, Express.js, MongoDB, and Mongoose. I also
-              use Redux, Ant Design, and ShadCN to build modern, responsive web
-              apps. On the backend, I work confidently with both NoSQL (MongoDB,
-              Mongoose) and SQL (PostgreSQL, Prisma, SQL) databases.
-            </p>
+            <ScrollReveal width="100%" delay={0.4}>
+              <p className="text-base md:text-lg font-light leading-relaxed text-gray-400 max-w-lg">
+                I am a MERN Stack Web Developer skilled in Tailwind CSS,
+                JavaScript, TypeScript, React.js, and Next.js. I have experience
+                with Firebase, Node.js, Express.js, MongoDB, and Mongoose. I also
+                use Redux, Ant Design, and ShadCN.
+              </p>
+            </ScrollReveal>
 
-            <div data-aos="fade-up" data-aos-duration="1000" className="pt-4">
-              <SocialIcons />
-            </div>
+            <ScrollReveal width="100%" delay={0.5}>
+              <div className="pt-4">
+                <SocialIcons />
+              </div>
+            </ScrollReveal>
 
-            <div data-aos="fade-up" data-aos-duration="1000" className="pt-4">
-              <button className="px-4 py-2 rounded-md bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2">
-                <Link href={"/contact"}>Hire Me</Link>
-              </button>
+            <div className="pt-4">
+              <MagneticButton>
+                <Link href={"/contact"} className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-blue-600 px-8 font-medium text-white transition-all duration-300 hover:bg-blue-700 w-full md:w-auto">
+                  <span className="mr-2">Hire Me</span>
+                  <span className="relative h-5 w-5 group-hover:translate-x-1 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  </span>
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-green-500 to-blue-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </Link>
+              </MagneticButton>
             </div>
           </div>
 
           {/* Right Content - Profile Image */}
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            className="w-full  flex-1 justify-center items-center"
-          >
-            <div className="text-center">
-              <div className="h-72 w-72 mx-auto mb-6 relative overflow-hidden rounded-full border-4 border-blue-500/30">
+          <div className="w-full flex-1 flex justify-center items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
+              className="relative"
+            >
+              {/* Glowing ring */}
+              <div className="absolute inset-0 rounded-full bg-blue-500 blur-[60px] opacity-30 animate-pulse" />
+
+              <div className="h-72 w-72 md:h-80 md:w-80 mx-auto relative overflow-hidden rounded-full border-4 border-blue-500/30 z-10 bg-gray-900">
                 <Image
                   src="/profile.jpg"
                   alt="Humayun Kabir Sobuj"
@@ -95,7 +105,15 @@ const Banner = () => {
                   priority
                 />
               </div>
-            </div>
+
+              {/* Floating Orbitals elements visualization (Optional decoration) */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-40px] rounded-full border border-blue-500/10 pointer-events-none"
+                style={{ borderStyle: "dashed" }}
+              />
+            </motion.div>
           </div>
         </div>
       </div>

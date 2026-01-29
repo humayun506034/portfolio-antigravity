@@ -1,25 +1,37 @@
+"use client";
 import { TProject } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ProjectCard = ({ project }: { project: TProject }) => {
     return (
-        <div
-            className="group bg-gray-900/30 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-blue-900/20 transition-all duration-300 hover:translate-y-[-5px]"
+        <motion.div
+            className="group bg-gray-900/30 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-all duration-300"
+            whileHover={{ y: -10, boxShadow: "0 20px 40px -10px rgba(59, 130, 246, 0.2)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
         >
-            <div className="flex flex-col lg:flex-row lg:items-center gap-6 p-5">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-4 md:gap-6 p-4 md:p-5">
                 {/* Project Image */}
                 <div className="w-full lg:w-[35%] overflow-hidden rounded-lg">
                     <div className="relative h-[250px] w-full overflow-hidden rounded-lg">
-                        <Image
-                            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                            src={project?.image || "/placeholder.svg"}
-                            alt={project?.title || "Project Image"}
-                            height={800}
-                            width={500}
-                            priority
-                        />
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.5 }}
+                            className="h-full w-full"
+                        >
+                            <Image
+                                className="object-cover w-full h-full"
+                                src={project?.image || "/placeholder.svg"}
+                                alt={project?.title || "Project Image"}
+                                height={800}
+                                width={500}
+                                priority
+                            />
+                        </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                 </div>
@@ -106,7 +118,7 @@ const ProjectCard = ({ project }: { project: TProject }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

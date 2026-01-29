@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
+import { ScrollReveal } from "../animations/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "HUMAYUN | Projects",
@@ -30,8 +31,10 @@ const HomePageProjects = () => {
 
       {/* Projects Grid */}
       <div className="space-y-10 md:space-y-16 mb-16 relative z-10">
-        {activeProjects.map((project: TProject) => (
-          <ProjectCard key={project._id} project={project} />
+        {activeProjects.map((project: TProject, index: number) => (
+          <ScrollReveal key={project._id} width="100%" delay={index * 0.1}>
+            <ProjectCard project={project} />
+          </ScrollReveal>
         ))}
       </div>
 
