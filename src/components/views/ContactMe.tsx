@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SocialIcons from "../SocialIcons/SocialIcons";
-import axios from "axios";
 
 const ContactMe = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -27,18 +26,14 @@ const ContactMe = () => {
   const onSubmit = async (data: FieldValues) => {
     try {
       // Handle form submission logic here
-      
+      console.log("Form Data:", data);
 
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/message/send-message`,
-        data
-      );
-      const result = await res.data;
-      // console.log(result);
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       reset()
 
-      toast.success("Message sent successfully", { duration: 2000 });
+      toast.success("Message sent successfully (Demo)", { duration: 2000 });
       // reset()
     } catch (error) {
       toast.error("Failed to send message", { duration: 2000 });
